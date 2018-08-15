@@ -1,4 +1,4 @@
-The material in this repository is release under the
+The material in this repository is released under the
 CC Attribution-Share Alike 3.0 Unported
 license.
 
