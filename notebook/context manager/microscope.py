@@ -9,6 +9,7 @@ class MicroscopeState:
 
         
 def connect_to_microscope():
+    """ Connect and lock microscope, and return state object. """
     microscope_state = MicroscopeState()
     microscope_state.connected = True
     print('Connected to microscope')
@@ -16,6 +17,7 @@ def connect_to_microscope():
 
 
 def release_microscope(microscope_state):
+    """ Unlock the microscope. """
     if not microscope_state.connected:
         raise RuntimeError('Microscope not connected')
     
@@ -24,6 +26,7 @@ def release_microscope(microscope_state):
     
 
 def make_void(microscope_state):
+    """ Activate the void pump. """
     if not microscope_state.connected:
         raise RuntimeError('Microscope not connected')
 
@@ -32,6 +35,7 @@ def make_void(microscope_state):
 
 
 def release_void(microscope_state):
+    """ Deactivate the void pump. """
     if not microscope_state.connected:
         raise RuntimeError('Microscope not connected')
     if not microscope_state.under_void:
@@ -42,6 +46,7 @@ def release_void(microscope_state):
     
 
 def insert_sample(microscope_state):
+    """ Insert the sample in the void chamber. """
     if not microscope_state.connected:
         raise RuntimeError('Microscope not connected')
     if not microscope_state.under_void:
@@ -52,6 +57,7 @@ def insert_sample(microscope_state):
     
 
 def remove_sample(microscope_state):
+    """ Remove the sample from the void chamber. """
     if not microscope_state.connected:
         raise RuntimeError('Microscope not connected')
     if not microscope_state.under_void:
@@ -64,6 +70,7 @@ def remove_sample(microscope_state):
 
     
 def calibrate(microscope_state):
+    """ Collect a calibration image. """
     if not microscope_state.connected:
         raise RuntimeError('Microscope not connected')
     if not microscope_state.under_void:
@@ -77,6 +84,7 @@ def calibrate(microscope_state):
 
 
 def scan_sample(microscope_state):
+    """ Scan the sample currently in the void chamber. """
     if not microscope_state.connected:
         raise RuntimeError('Microscope not connected')
     if not microscope_state.under_void:
