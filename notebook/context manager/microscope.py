@@ -3,7 +3,7 @@ import numpy as np
 
 class MicroscopeState:
     def __init__(self):
-        self.under_void = False
+        self.under_vacuum = False
         self.probe_present = False
         self.connected = False
 
@@ -25,43 +25,43 @@ def release_microscope(microscope_state):
     print('Microscope released')
     
 
-def make_void(microscope_state):
-    """ Activate the void pump. """
+def activate_vacuum_pump(microscope_state):
+    """ Activate the vacuum pump. """
     if not microscope_state.connected:
         raise RuntimeError('Microscope not connected')
 
-    microscope_state.under_void = True
-    print('Microscope under void')
+    microscope_state.under_vacuum = True
+    print('Vacuum pump activated')
 
 
-def release_void(microscope_state):
-    """ Deactivate the void pump. """
+def deactivate_vacuum_pump(microscope_state):
+    """ Deactivate the vacuum pump. """
     if not microscope_state.connected:
         raise RuntimeError('Microscope not connected')
-    if not microscope_state.under_void:
-        raise RuntimeError('Microscope not under void')
+    if not microscope_state.under_vacuum:
+        raise RuntimeError('Microscope not under vacuum')
     
-    microscope_state.under_void = False
-    print('Void released')
+    microscope_state.under_vacuum = False
+    print('Vacuum pump deactivated')
     
 
 def insert_sample(microscope_state):
-    """ Insert the sample in the void chamber. """
+    """ Insert the sample in the vacuum chamber. """
     if not microscope_state.connected:
         raise RuntimeError('Microscope not connected')
-    if not microscope_state.under_void:
-        raise RuntimeError('Microscope not under void')
+    if not microscope_state.under_vacuum:
+        raise RuntimeError('Microscope not under vacuum')
     
     microscope_state.probe_present = True
     print('Probe inserted')
     
 
 def remove_sample(microscope_state):
-    """ Remove the sample from the void chamber. """
+    """ Remove the sample from the vacuum chamber. """
     if not microscope_state.connected:
         raise RuntimeError('Microscope not connected')
-    if not microscope_state.under_void:
-        raise RuntimeError('Microscope not under void')
+    if not microscope_state.under_vacuum:
+        raise RuntimeError('Microscope not under vacuum')
     if not microscope_state.probe_present:
         raise RuntimeError('Probe not present')
       
@@ -73,8 +73,8 @@ def calibrate(microscope_state):
     """ Collect a calibration image. """
     if not microscope_state.connected:
         raise RuntimeError('Microscope not connected')
-    if not microscope_state.under_void:
-        raise RuntimeError('Microscope not under void')
+    if not microscope_state.under_vacuum:
+        raise RuntimeError('Microscope not under vacuum')
 
     print('Collecting calibration image...')
     calibration_image = np.zeros((256, 256))
@@ -84,11 +84,11 @@ def calibrate(microscope_state):
 
 
 def scan_sample(microscope_state):
-    """ Scan the sample currently in the void chamber. """
+    """ Scan the sample currently in the vacuum chamber. """
     if not microscope_state.connected:
         raise RuntimeError('Microscope not connected')
-    if not microscope_state.under_void:
-        raise RuntimeError('Microscope not under void')
+    if not microscope_state.under_vacuum:
+        raise RuntimeError('Microscope not under vacuum')
     if not microscope_state.probe_present:
         raise RuntimeError('Probe not present')
     
